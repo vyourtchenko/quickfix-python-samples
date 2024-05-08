@@ -16,7 +16,7 @@ logfix = logging.getLogger('logfix')
 
 class Application(fix.Application):
     """FIX Application"""
-    execID = 0
+    ClOrdID = 0
 
     def onCreate(self, sessionID):
         print("onCreate : Session (%s)" % sessionID.toString())
@@ -53,9 +53,10 @@ class Application(fix.Application):
         """Processing application message here"""
         pass
 
-    def genExecID(self):
-    	self.execID += 1
-    	return str(self.execID).zfill(5)
+    def genClOrdID(self):
+        """Generate ClOrdID"""
+        self.ClOrdID += 1
+        return str(self.ClOrdID).zfill(5)
 
     def put_new_order(self):
         """Request sample new order single"""
@@ -64,7 +65,7 @@ class Application(fix.Application):
 
         header.setField(fix.MsgType(fix.MsgType_NewOrderSingle)) #39 = D 
 
-        message.setField(fix.ClOrdID(self.genExecID())) #11 = Unique Sequence Number
+        message.setField(fix.ClOrdID(self.genClOrdID())) #11 = Unique Sequence Number
         message.setField(fix.Side(fix.Side_BUY)) #43 = 1 BUY 
         message.setField(fix.Symbol("MSFT")) #55 = MSFT
         message.setField(fix.OrderQty(10000)) #38 = 1000
@@ -74,7 +75,7 @@ class Application(fix.Application):
         message.setField(fix.TimeInForce('0'))
         message.setField(fix.Text("NewOrderSingle"))
         trstime = fix.TransactTime()
-        trstime.setString(datetime.utcnow().strftime("%Y%m%d-%H:%M:%S.%f")[:-3])
+        trstime.setString(datetime.now().strftime("%Y%m%d-%H:%M:%S.%f")[:-3])
         message.setField(trstime)
 
         fix.Session.sendToTarget(message, self.sessionID)
