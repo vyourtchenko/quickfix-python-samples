@@ -9,3 +9,9 @@ __pycache__
 /initiator/Sessions/*
 /Pipfile
 /Pipfile.lock
+pyvenv.cfg
+bin
+lib
+share
+include
+.DS_Store

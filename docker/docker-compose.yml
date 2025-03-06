@@ -19,28 +19,8 @@ services:
       - ${APP_PORT}:${APP_PORT}
     networks:
       - quickfix
-  
-  initiator:
-    build:
-      context: ../
-      dockerfile: ./docker/Dockerfile
-    restart: always
-    working_dir: ${WORKING_DIR}
-    volumes:
-      - ../:${WORKING_DIR}
-    command:
-      - ${WORKING_DIR}/initiator/start.sh
-    stdin_open: true
-    tty: true
-    env_file:
-      - .env
-    links:
-      - acceptor
-    networks:
-      - quickfix
 
 networks:
   quickfix:
 
 
-  

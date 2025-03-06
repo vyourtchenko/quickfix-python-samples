@@ -1,8 +1,3 @@
-# QuickFIX Python Samples #
-* Established connection by [FIX protocol](https://www.fixtrading.org/standards/)  
-* Author: Rin Le <rinle.it [a] gmail.com>.  
-* Details: [Configuration for quickfix](https://www.quickfixj.org/usermanual/2.3.0/usage/configuration.html)  
-
 ## Requirements
 * Python 3.x
 * [QuickFIX Engine 1.15.1](http://www.quickfixengine.org/)
@@ -32,11 +27,3 @@ Please edit file initiator/client.cfg: Tag SocketConnectHost=127.0.0.1 <br>
 cd ./acceptor
 python server.py server.cfg
 ```
-
-#### Run Client
-```sh
-cd ./initiator
-python client.py client.cfg
-```
-
-
